@@ -1,0 +1,512 @@
+/* ============================================
+   EXHIBITIONS PAGE - MODERN RTL DESIGN
+   ============================================ */
+
+:root {
+    --primary: #2d5f7f;
+    --primary-light: #4a8fb8;
+    --primary-dark: #1a3d54;
+    --accent: #667eea;
+    --accent-light: #667eea;
+    --accent-glow: rgba(109, 34, 230, 0.3);
+    --dark: #1a1a2e;
+    --text: #333333;
+    --text-light: #000000;
+    --white: #fff;
+    --bg-light: #f8f9fa;
+    --gradient-1:  linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+    --gradient-2: linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+    --gradient-overlay: linear-gradient(to bottom, rgba(26, 26, 46, 0.7), rgba(45, 95, 127, 0.8));
+    --shadow-sm: 0 2px 10px rgba(0,0,0,0.08);
+    --shadow-md: 0 8px 30px rgba(0,0,0,0.12);
+    --shadow-lg: 0 20px 60px rgba(0,0,0,0.15);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.exhibitions-page {
+    direction: rtl;
+    font-family: 'Tajawal', 'Cairo', sans-serif;
+    background: var(--bg-light);
+    overflow-x: hidden;
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+
+.exhibitions-hero {
+    position: relative;
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 6rem 2rem;
+    background: var(--gradient-1);
+    overflow: hidden;
+}
+
+/* Animated Background Elements */
+.exhibitions-hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(0, 0, 0, 0.2) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: floatBubble 15s ease-in-out infinite;
+}
+
+.exhibitions-hero::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(74, 143, 184, 0.25) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: floatBubble 12s ease-in-out infinite reverse;
+}
+
+@keyframes floatBubble {
+    0%, 100% {
+        transform: translate(0, 0) scale(1);
+    }
+    50% {
+        transform: translate(50px, -50px) scale(1.1);
+    }
+}
+
+/* Geometric Pattern Overlay */
+.exhibitions-hero {
+    background-image: 
+        repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.05) 35px, rgba(255,255,255,.05) 70px),
+        var(--gradient-1);
+}
+
+.exhibitions-hero h1 {
+    position: relative;
+    z-index: 2;
+    font-size: clamp(2.8rem, 7vw, 5rem);
+    font-weight: 900;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+    text-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    letter-spacing: -0.02em;
+    animation: fadeInDown 1s ease-out;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.exhibitions-hero h1::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 140px;
+    height: 5px;
+    background: var(--gradient-2);
+    border-radius: 3px;
+    box-shadow: 0 0 25px var(--accent-glow);
+    animation: expandWidth 1s ease-out 0.5s backwards;
+}
+
+@keyframes expandWidth {
+    from {
+        width: 0;
+    }
+    to {
+        width: 140px;
+    }
+}
+
+.exhibitions-hero p {
+    position: relative;
+    z-index: 2;
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    color: rgba(255, 255, 255, 0.95);
+    max-width: 800px;
+    line-height: 1.9;
+    margin-top: 2.5rem;
+    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+    animation: fadeInUp 1s ease-out 0.3s backwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================
+   EXHIBITIONS GRID
+   ============================================ */
+
+.exhibitions-container {
+    max-width: 1400px;
+    margin: -100px auto 6rem;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 3rem;
+    position: relative;
+    z-index: 10;
+}
+
+/* ============================================
+   EXHIBITION CARDS
+   ============================================ */
+
+.exhibition-card {
+    background: var(--white);
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    animation: fadeInScale 0.8s ease-out backwards;
+}
+
+.exhibition-card:nth-child(1) { animation-delay: 0.1s; }
+.exhibition-card:nth-child(2) { animation-delay: 0.2s; }
+.exhibition-card:nth-child(3) { animation-delay: 0.3s; }
+.exhibition-card:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.exhibition-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--gradient-2);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.exhibition-card:hover::before {
+    opacity: 0.05;
+}
+
+.exhibition-card:hover {
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25);
+}
+
+/* Image Container */
+.exhibition-card img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    display: block;
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+}
+
+.exhibition-card:hover img {
+    transform: scale(1.1);
+    filter: brightness(1.1);
+}
+
+/* Image Overlay Effect */
+.exhibition-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 320px;
+    background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.1) 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.exhibition-card:hover::after {
+    opacity: 1;
+}
+
+/* ============================================
+   EXHIBITION INFO
+   ============================================ */
+
+.exhibition-info {
+    padding: 2rem 2rem 2.5rem;
+    position: relative;
+    z-index: 3;
+}
+
+.exhibition-info h3 {
+    font-size: 1.8rem;
+    color: var(--dark);
+    margin-bottom: 1rem;
+    font-weight: 800;
+    line-height: 1.3;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+}
+
+.exhibition-card:hover .exhibition-info h3 {
+    color: var(--primary);
+    transform: translateX(-5px);
+}
+
+.exhibition-info h3::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    right: 0;
+    width: 0;
+    height: 3px;
+    background: var(--gradient-2);
+    transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border-radius: 2px;
+}
+
+.exhibition-card:hover .exhibition-info h3::after {
+    width: 100%;
+}
+
+.exhibition-info p {
+    font-size: 1.15rem;
+    color: var(--text-light);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    min-height: 50px;
+}
+
+.exhibition-info span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    color: var(--white);
+    background: var(--gradient-1);
+    padding: 0.7rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.exhibition-card:hover .exhibition-info span {
+    background: var(--gradient-2);
+    transform: translateX(-5px);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+}
+
+/* ============================================
+   DECORATIVE CORNER ACCENT
+   ============================================ */
+
+.exhibition-card {
+    position: relative;
+}
+
+.exhibition-card .exhibition-info::before {
+    content: '';
+    position: absolute;
+    top: -40px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background: var(--gradient-2);
+    border-radius: 50%;
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: -1;
+}
+
+.exhibition-card:hover .exhibition-info::before {
+    opacity: 0.15;
+    transform: scale(1);
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 1200px) {
+    .exhibitions-container {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .exhibitions-hero {
+        min-height: 55vh;
+        padding: 4rem 1.5rem;
+    }
+
+    .exhibitions-hero::before,
+    .exhibitions-hero::after {
+        width: 400px;
+        height: 400px;
+    }
+
+    .exhibitions-container {
+        margin-top: -80px;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 0 1.5rem;
+    }
+
+    .exhibition-card img {
+        height: 260px;
+    }
+
+    .exhibition-card::after {
+        height: 260px;
+    }
+
+    .exhibition-info {
+        padding: 1.8rem 1.5rem 2rem;
+    }
+
+    .exhibition-info h3 {
+        font-size: 1.6rem;
+    }
+
+    .exhibition-info p {
+        font-size: 1.05rem;
+        min-height: auto;
+    }
+
+    .exhibition-info span {
+        font-size: 0.95rem;
+        padding: 0.6rem 1.3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .exhibitions-hero h1::after {
+        width: 100px;
+    }
+
+    .exhibition-card {
+        border-radius: 20px;
+    }
+
+    .exhibition-card img {
+        height: 220px;
+    }
+
+    .exhibition-card::after {
+        height: 220px;
+    }
+
+    .exhibition-info h3 {
+        font-size: 1.4rem;
+    }
+}
+
+/* ============================================
+   GRID VARIATIONS FOR DIFFERENT SCREEN SIZES
+   ============================================ */
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .exhibitions-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1400px) {
+    .exhibitions-container {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2.5rem;
+    }
+
+    .exhibition-card img {
+        height: 280px;
+    }
+
+    .exhibition-card::after {
+        height: 280px;
+    }
+}
+
+/* ============================================
+   ACCESSIBILITY & ANIMATIONS
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Focus States for Accessibility */
+.exhibition-card:focus-within {
+    outline: 3px solid var(--primary);
+    outline-offset: 4px;
+}
+
+/* Print Styles */
+@media print {
+    .exhibitions-hero {
+        background: var(--white);
+        color: var(--dark);
+        min-height: auto;
+        padding: 2rem;
+    }
+
+    .exhibitions-hero::before,
+    .exhibitions-hero::after {
+        display: none;
+    }
+
+    .exhibitions-container {
+        margin-top: 2rem;
+    }
+
+    .exhibition-card {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+}
