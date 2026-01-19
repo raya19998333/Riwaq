@@ -11,16 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('notifications', function (Blueprint $table) {
-    $table->id('notification_id');
+   Schema::create('notifications', function (Blueprint $table) {
+    $table->id();
+
     $table->string('title');
     $table->text('message');
-    $table->dateTime('created_at')->nullable();
-    $table->unsignedBigInteger('user_id')->nullable();
-    $table->timestamps();
 
-    $table->foreign('user_id')->references('user_id')->on('users')->onDelete('set null');
+    $table->foreignId('user_id')
+          ->nullable()
+          ->constrained()
+          ->nullOnDelete();
+
+    $table->timestamps(); // ✅ هذا يكفي لـ created_at و updated_at
 });
+
 
     }
 

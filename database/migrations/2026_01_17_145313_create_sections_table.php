@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sections', function (Blueprint $table) {
-    $table->id('section_id');
+       Schema::create('sections', function (Blueprint $table) {
+    $table->id(); // ✅ id فقط
     $table->string('name');
     $table->text('description')->nullable();
-    $table->integer('floor_number');
+    $table->integer('floor_number')->nullable();
     $table->timestamps();
 });
+
     }
 
     /**

@@ -11,16 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cultural_contents', function (Blueprint $table) {
-    $table->id('content_id');
+       Schema::create('cultural_contents', function (Blueprint $table) {
+    $table->id();
+
     $table->string('title');
     $table->text('body');
     $table->string('content_type');
     $table->date('publish_date')->nullable();
-    $table->unsignedBigInteger('user_id')->nullable();
-    $table->timestamps();
 
-    $table->foreign('user_id')->references('user_id')->on('users')->onDelete('set null');
+    $table->foreignId('user_id')
+          ->nullable()
+          ->constrained()    // يشير تلقائيًا إلى users.id
+          ->nullOnDelete();  // إذا حُذف المستخدم تصبح القيمة null
+
+    $table->timestamps();
 });
 
     }

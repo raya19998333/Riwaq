@@ -11,17 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-     Schema::create('exhibitions', function (Blueprint $table) {
-    $table->id('exhibition_id');
+   Schema::create('exhibitions', function (Blueprint $table) {
+    $table->id(); // المفتاح الأساسي
+
     $table->string('title');
     $table->text('description')->nullable();
     $table->date('start_date');
     $table->date('end_date');
-    $table->unsignedBigInteger('section_id');
-    $table->timestamps();
 
-    $table->foreign('section_id')->references('section_id')->on('sections')->onDelete('cascade');
+    // الربط مع sections
+    $table->foreignId('section_id')
+          ->constrained()   // يشير تلقائيًا إلى sections.id
+          ->onDelete('cascade');
+
+    $table->timestamps();
 });
+
 
     }
 

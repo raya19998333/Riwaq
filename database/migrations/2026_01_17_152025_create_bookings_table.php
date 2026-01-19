@@ -11,33 +11,32 @@ return new class extends Migration
      */
     public function up(): void
     {
-       Schema::create('bookings', function (Blueprint $table) {
-    $table->id('booking_id');
-    $table->date('booking_date');
-    $table->time('start_time');
-    $table->time('end_time');
-    $table->integer('attendees');
-    $table->string('event_type');
-    $table->string('status');
-    $table->decimal('total_price', 10, 2)->nullable();
-    $table->unsignedBigInteger('user_id');
-    $table->unsignedBigInteger('hall_id');
-    $table->timestamps();
+ Schema::create('bookings', function (Blueprint $table) {
+    $table->id(); // primary key
 
+    // الربط الصحيح مع جدول users
     $table->foreignId('user_id')
           ->nullable()
-          ->constrained('users') // ← تلقائيًا يربط مع users.id
+          ->constrained() // يفترض users.id تلقائيًا
           ->onDelete('cascade');
 
+    // الربط الصحيح مع جدول halls
     $table->foreignId('hall_id')
-          ->constrained('halls')
+          ->constrained()  // يفترض halls.id تلقائيًا
           ->onDelete('cascade');
 
-    $table->date('booking_date');
+    // باقي الحقول
+    $table->date('booking_date')->nullable();
+    $table->time('start_time')->nullable();
+    $table->time('end_time')->nullable();
+    $table->integer('attendees')->nullable();
+    $table->string('event_type')->nullable();
     $table->string('status')->default('pending');
+    $table->decimal('total_price', 10, 2)->nullable();
 
     $table->timestamps();
 });
+
 
     }
 

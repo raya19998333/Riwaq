@@ -11,19 +11,23 @@ return new class extends Migration
      */
     public function up(): void
     {
-      Schema::create('halls', function (Blueprint $table) {
-    $table->id('hall_id');
+  Schema::create('halls', function (Blueprint $table) {
+    $table->id(); // ✅ id
+
     $table->string('name');
     $table->integer('capacity');
     $table->string('hall_type');
-    $table->string('equipment')->nullable();
     $table->decimal('price', 10, 2);
+    $table->string('equipment')->nullable();
     $table->string('image')->nullable();
-    $table->unsignedBigInteger('section_id');
-    $table->timestamps();
 
-    $table->foreign('section_id')->references('section_id')->on('sections')->onDelete('cascade');
+    $table->foreignId('section_id')
+          ->constrained()       // ✅ يشير تلقائيًا إلى sections.id
+          ->onDelete('cascade');
+
+    $table->timestamps();
 });
+
     }
 
     /**
